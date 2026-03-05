@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "TrendSniperAgent output contract. Validates the viral angle output before passing to SocialScriptAgent.",
+  "type": "object",
+  "required": ["status", "venture_id", "topic", "viral_angle", "emotional_trigger", "hook_format"],
+  "properties": {
+    "status":            { "type": "string" },
+    "venture_id":        { "type": "string" },
+    "niche_focus":       { "type": "string" },
+    "topic":             { "type": "string", "minLength": 1 },
+    "viral_angle":       { "type": "string", "minLength": 10 },
+    "emotional_trigger": {
+      "type": "string",
+      "enum": ["curiosity", "validation", "aspiration", "controversy"]
+    },
+    "hook_format": {
+      "type": "string",
+      "enum": ["question", "statement", "list", "hot_take"]
+    },
+    "why_it_works": { "type": "string" }
+  }
+}

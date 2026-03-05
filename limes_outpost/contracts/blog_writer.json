@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "BlogWriterAgent output contract. Validates the blog_draft returned by run().",
+  "type": "object",
+  "required": ["status", "title", "body_markdown", "word_count"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "error"]
+    },
+    "venture_id": { "type": "string" },
+    "title": { "type": "string", "minLength": 5 },
+    "body_markdown": { "type": "string", "minLength": 100 },
+    "word_count": { "type": "integer", "minimum": 50 },
+    "primary_keyword": { "type": "string" },
+    "meta_description": { "type": "string" },
+    "primary_keyword_used": { "type": "boolean" },
+    "cta_included": { "type": "boolean" }
+  }
+}

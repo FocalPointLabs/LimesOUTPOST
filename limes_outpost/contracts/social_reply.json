@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "ReplyAgent output contract. Enforces X 280-char reply limit.",
+  "type": "object",
+  "required": ["reply_text", "char_count"],
+  "properties": {
+    "reply_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 280,
+      "description": "Complete reply text. Hard 280-char limit enforced here."
+    },
+    "char_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 280
+    }
+  }
+}

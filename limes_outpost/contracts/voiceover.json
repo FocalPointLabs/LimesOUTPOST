@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "VoiceoverAgent output contract. Validates the vo_output wrapper returned by run().",
+  "type": "object",
+  "required": [
+    "status",
+    "vo_output"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "error"
+      ]
+    },
+    "vo_output": {
+      "type": "object",
+      "required": [
+        "audio_file_path",
+        "duration_seconds",
+        "alignment_data"
+      ],
+      "properties": {
+        "audio_file_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 1.0
+        },
+        "alignment_data": {
+          "type": "object"
+        },
+        "provider_metadata": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string"
+            },
+            "model_id": {
+              "type": "string"
+            },
+            "voice_id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

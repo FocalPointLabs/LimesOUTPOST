@@ -1,0 +1,15 @@
+{
+  "venture_id": "test-ven-001",
+  "name": "Test Venture",
+  "niche": "A simple test",
+  "tts_voice_id": "dHjxgDkQB3oz31Zfa5q2",
+  "description": "run of the setup",
+  "rules": {
+    "approved_vocabulary": [
+      "goodly"
+    ],
+    "banned_vocabulary": [
+      "badly"
+    ]
+  }
+}

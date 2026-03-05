@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "StrategyAgent output contract. Validates full baton returned by run().",
+  "type": "object",
+  "required": [
+    "status",
+    "chosen_topic",
+    "strategy_output"
+  ],
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "chosen_topic": {
+      "type": "string",
+      "minLength": 1
+    },
+    "directive_used": {
+      "type": "boolean"
+    },
+    "strategy_output": {
+      "type": "object",
+      "required": [
+        "venture_id",
+        "niche_focus",
+        "core_hook",
+        "estimated_duration_seconds"
+      ],
+      "properties": {
+        "venture_id": {
+          "type": "string"
+        },
+        "niche_focus": {
+          "type": "string"
+        },
+        "campaign_name": {
+          "type": "string"
+        },
+        "core_hook": {
+          "type": "string",
+          "minLength": 10
+        },
+        "target_audience": {
+          "type": "string"
+        },
+        "estimated_duration_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "content_plan": {
+          "type": "array"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "workflows": {
+    "short_form_video": {
+      "enabled": true
+    },
+    "blog_post": {
+      "enabled": true
+    },
+    "social_post": {
+      "enabled": true
+    }
+  }
+}

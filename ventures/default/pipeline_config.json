@@ -1,0 +1,111 @@
+{
+  "pipeline_version": "2.0.0",
+  "_comment": "Base config — defines all canonical workflows and steps. Venture overrides layer on top of this. Do not add venture-specific logic here.",
+
+  "shared_phases": [
+    {
+      "step_id": "intel_strategy_phase",
+      "agent_class": "IntelStrategyAgent",
+      "module": "limes_outpost.agents.intelstrategy_agent",
+      "input_key": "initial_query",
+      "output_key": "intel_directive"
+    }
+  ],
+
+  "workflows": {
+    "short_form_video": {
+      "enabled": true,
+      "steps": [
+        {
+          "step_id": "strategy_phase",
+          "agent_class": "StrategyAgent",
+          "module": "limes_outpost.agents.strategy_agent",
+          "input_key": "intel_directive",
+          "output_key": "strategy_output"
+        },
+        {
+          "step_id": "script_phase",
+          "agent_class": "ScriptAgent",
+          "module": "limes_outpost.agents.script_agent",
+          "input_key": "strategy_output",
+          "output_key": "script_output"
+        },
+        {
+          "step_id": "voiceover_phase",
+          "agent_class": "VoiceoverAgent",
+          "module": "limes_outpost.agents.voiceover_agent",
+          "input_key": "script_output",
+          "extract_key": "script_output",
+          "output_key": "voiceover_data"
+        },
+        {
+          "step_id": "visual_phase",
+          "agent_class": "VisualAgent",
+          "module": "limes_outpost.agents.visual_agent",
+          "input_key": "script_output",
+          "extract_key": "scenes",
+          "output_key": "visual_data"
+        },
+        {
+          "step_id": "composition_phase",
+          "agent_class": "ComposerAgent",
+          "module": "limes_outpost.agents.composer_agent",
+          "required_inputs": {
+            "visual_data": "visual_data",
+            "voiceover_data": "voiceover_data",
+            "script_data": "script_output"
+          },
+          "output_key": "final_video"
+        }
+      ]
+    },
+
+    "blog_post": {
+      "enabled": true,
+      "steps": [
+        {
+          "step_id": "blog_strategy_phase",
+          "agent_class": "BlogStrategyAgent",
+          "module": "limes_outpost.agents.blog_strategy_agent",
+          "input_key": "intel_directive",
+          "output_key": "blog_strategy_output"
+        },
+        {
+          "step_id": "blog_writer_phase",
+          "agent_class": "BlogWriterAgent",
+          "module": "limes_outpost.agents.blog_writer_agent",
+          "input_key": "blog_strategy_output",
+          "output_key": "blog_draft"
+        },
+        {
+          "step_id": "blog_formatter_phase",
+          "agent_class": "BlogFormatterAgent",
+          "module": "limes_outpost.agents.blog_formatter_agent",
+          "input_key": "blog_draft",
+          "output_key": "final_blog"
+        }
+      ]
+    },
+
+    "social_post": {
+      "enabled": false,
+      "_comment": "Disabled by default — enable per-venture once Twitter credentials are configured.",
+      "steps": [
+        {
+          "step_id": "trend_sniper_phase",
+          "agent_class": "TrendSniperAgent",
+          "module": "limes_outpost.agents.trend_sniper_agent",
+          "input_key": "intel_directive",
+          "output_key": "trend_sniper_output"
+        },
+        {
+          "step_id": "social_script_phase",
+          "agent_class": "SocialScriptAgent",
+          "module": "limes_outpost.agents.social_script_agent",
+          "input_key": "trend_sniper_output",
+          "output_key": "social_script_output"
+        }
+      ]
+    }
+  }
+}

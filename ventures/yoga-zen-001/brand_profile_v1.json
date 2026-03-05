@@ -1,0 +1,112 @@
+{
+  "schema_version": "2.0.0",
+  "venture_id": "yoga-zen-001",
+  "name": "Yoga Zen",
+  "brand_profile_version": "1.0.0",
+  "niche": "Yoga",
+  "created_at": "2026-02-23T12:00:00Z",
+  "identity": {
+    "persona_type": "yoga_instructor",
+    "energy_level": 2,
+    "words_per_minute_target": 130,
+    "tts_voice_id": "dHjxgDkQB3oz31Zfa5q2",
+    "tone_vocabulary": [
+      "mindful",
+      "fluid",
+      "serene",
+      "grounded",
+      "present"
+    ]
+  },
+  "audience": {
+    "core_aspirations": [
+      "Mental clarity",
+      "Physical flexibility",
+      "Stress reduction"
+    ],
+    "core_beliefs": [
+      "Breath is the bridge",
+      "Presence over perfection"
+    ]
+  },
+  "narrative": {
+    "framework": "Atmospheric-Guidance-Insight-PeacefulCTA",
+    "hook_style": "inviting_question",
+    "cta_phrasing": "Find your center. Follow for daily flow.",
+    "target_video_duration_seconds": {
+      "min": 20,
+      "max": 45
+    }
+  },
+  "visual": {
+    "color_palette": {
+      "primary": "#F5F5DC",
+      "secondary": "#2F4F4F",
+      "accent": "#A9BA9D"
+    },
+    "aesthetic_category": "minimalist_zen",
+    "style_appendix": "Natural morning light, soft lens flares, minimalist studio with plants, slow cinematic pans, focus on breath and alignment.",
+    "negative_visual_prompts": [
+      "darkness",
+      "aggression",
+      "fast cuts",
+      "heavy weights",
+      "crowds"
+    ]
+  },
+  "rules": {
+    "approved_vocabulary": [
+      "inhale",
+      "exhale",
+      "alignment",
+      "tranquility",
+      "presence"
+    ],
+    "banned_vocabulary": [
+      "crush",
+      "grind",
+      "beast",
+      "weakness"
+    ],
+    "in_scope_topics": [
+      "sun salutations",
+      "breathwork",
+      "restorative poses"
+    ],
+    "out_of_scope_topics": [
+      "intense cardio",
+      "diet pills"
+    ]
+  },
+  "blog": {
+    "author_persona": "A calm, knowledgeable yoga guide who writes like they're speaking directly to a student after class — warm, grounded, never preachy.",
+    "style": {
+      "tone": "conversational-authoritative",
+      "reading_level": "accessible",
+      "pov": "second_person",
+      "avg_article_length_words": 800,
+      "use_subheadings": true,
+      "use_bullet_points": false
+    },
+    "structure": {
+      "framework": "Hook-Context-Insight-Takeaway-CTA",
+      "intro_style": "open_with_question",
+      "cta_phrasing": "Save this for your next practice. Follow for daily flow."
+    },
+    "rules": {
+      "banned_vocabulary": [
+        "crush",
+        "grind",
+        "beast",
+        "weakness"
+      ],
+      "approved_vocabulary": [
+        "inhale",
+        "exhale",
+        "alignment",
+        "presence"
+      ],
+      "max_intro_sentences": 3
+    }
+  }
+}

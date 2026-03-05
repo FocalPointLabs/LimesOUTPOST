@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "ComposerAgent output contract.",
+  "type": "object",
+  "required": [
+    "status",
+    "render_id"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "rendering",
+        "succeeded",
+        "failed"
+      ]
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "render_id": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "composition_metadata": {
+      "type": "object",
+      "properties": {
+        "has_captions": {
+          "type": "boolean"
+        },
+        "total_duration": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

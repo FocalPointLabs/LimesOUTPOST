@@ -1,0 +1,126 @@
+services:
+
+  # Postgres
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER:     limes_outpost_user
+      POSTGRES_PASSWORD: limes_outpost_password
+      POSTGRES_DB:       limes_outpost_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U limes_outpost_user -d limes_outpost_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # App (CLI / dev container)
+  app:
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    tty: true
+
+  # FastAPI
+  api:
+    build: .
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: on-failure
+
+  # Celery Worker
+  celery_worker:
+    build: .
+    command: >
+      celery -A worker.main worker
+      --loglevel=info
+      --queues=high,default,low
+      --concurrency=4
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: on-failure
+
+  # Celery Beat
+  celery_beat:
+    build: .
+    command: >
+      celery -A worker.main beat
+      --loglevel=info
+      --scheduler=celery.beat.PersistentScheduler
+      --schedule=/tmp/celerybeat-schedule
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: on-failure
+
+  # Flower
+  flower:
+    image: mher/flower:2.0
+    command: >
+      celery flower
+      --broker=redis://redis:6379/0
+      --port=5555
+    ports:
+      - "5555:5555"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: on-failure
+
+volumes:
+  postgres_data:
+    name: limes_outpost_postgres_data

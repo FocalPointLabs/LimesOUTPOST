@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-sans: 'Geist Mono', 'JetBrains Mono', monospace;
+  --font-mono: 'Geist Mono', monospace;
+
+  /* ─── Botanical Terminal Palette ──────────────────────────────
+     Philosophy: dark like deep forest, not dark like a bunker.
+     Backgrounds carry a faint warm-green tint. Borders breathe
+     via transparency. The lime accent feels fresh, not radioactive.
+  ─────────────────────────────────────────────────────────────── */
+
+  /* Depth layers — each step is a meaningful lift */
+  --color-canvas:         #0c1209;   /* deep forest floor */
+  --color-surface:        #141d0d;   /* one layer up — visible but subtle */
+  --color-elevated:       #1d2a13;   /* cards, modals — clearly raised */
+  --color-overlay:        #243317;   /* tooltips, dropdowns — highest layer */
+
+  /* Borders — transparent so they don't carve hard lines */
+  --color-border:         rgba(90, 120, 48, 0.28);
+  --color-border-hi:      rgba(140, 180, 60, 0.50);
+  --color-border-focus:   rgba(163, 230, 53, 0.70);
+
+  /* Brand Accent: Fresh Lime */
+  --color-accent:         #b4ef3a;   /* slightly brighter — feels alive */
+  --color-accent-dim:     #8fcf18;
+  --color-accent-muted:   #6ea512;   /* for subtle accent text */
+  --color-accent-glow:    rgba(180, 239, 58, 0.16);
+  --color-accent-faint:   rgba(180, 239, 58, 0.07);
+
+  /* Secondary accent: Sage mint — for tags, highlights, variety */
+  --color-sage:           #6ee7b7;
+  --color-sage-faint:     rgba(110, 231, 183, 0.08);
+
+  /* Semantic Status */
+  --color-success:        #4ade80;
+  --color-warning:        #fbbf24;
+  --color-danger:         #f87171;
+  --color-neutral:        #5a7840;
+
+  /* Typography — warm, readable, not grey-green */
+  --color-ink-primary:    #edf5d8;   /* warm near-white, slight lime tint */
+  --color-ink-secondary:  #9dc06a;   /* mid-green — clear and legible */
+  --color-ink-muted:      #607848;   /* recessive but not invisible */
+  --color-ink-faint:      #3d5030;   /* decorative, disabled states */
+
+  /* Radii — rounded enough to feel modern, sharp enough for character */
+  --radius-xs: 3px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Shadows — give real depth without harsh black blobs */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md:  0 4px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.45), 0 4px 8px rgba(0, 0, 0, 0.25);
+  --shadow-accent: 0 0 20px rgba(180, 239, 58, 0.12);
+
+  /* Animations */
+  --animate-pulse-slow:    pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-in:       fade-in 0.25s ease-out;
+  --animate-slide-up:      slide-up 0.25s ease-out;
+  --animate-slide-in-left: slide-in-left 0.2s ease-out;
+  --animate-pop:           pop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.35; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0);   }
+  }
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0);    }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1);    }
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink-primary);
+    font-family: var(--font-sans);
+    letter-spacing: -0.005em;   /* barely tightened — readable, not compressed */
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--color-accent-faint);
+    color: var(--color-accent);
+  }
+
+  /* Scrollbar — thin, unobtrusive */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { 
+    background: var(--color-border-hi);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-accent-muted); }
+}
+
+@layer components {
+
+  /* ── Structural surfaces ────────────────────────────────────── */
+
+  .panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  /* Card: elevated layer with gradient top-edge for depth */
+  .card {
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--color-elevated) 100%, var(--color-accent) 3%) 0%,
+      var(--color-elevated) 60%
+    );
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    transition: border-color 200ms, box-shadow 200ms;
+
+    &:hover {
+      border-color: var(--color-border-hi);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  /* ── Utility atoms ──────────────────────────────────────────── */
+
+  .status-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 0 6px currentColor;
+  }
+
+  .mono { font-family: var(--font-mono); }
+
+  /* Grid: very faint, organic not mechanical */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(180, 239, 58, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(180, 239, 58, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Subtle noise texture for surfaces that need warmth */
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px;
+  }
+
+  /* ── Form controls ──────────────────────────────────────────── */
+
+  .input-base {
+    width: 100%;
+    padding: 0.5625rem 0.875rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-primary);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    transition: border-color 150ms, box-shadow 150ms, background-color 150ms;
+
+    &:hover:not(:focus) {
+      border-color: var(--color-border-hi);
+    }
+    &:focus {
+      outline: none;
+      border-color: var(--color-border-focus);
+      background-color: color-mix(in srgb, var(--color-surface) 85%, var(--color-accent) 15%);
+      box-shadow: 0 0 0 3px var(--color-accent-faint), 0 0 12px var(--color-accent-glow);
+    }
+    &::placeholder { color: var(--color-ink-faint); }
+  }
+
+  /* ── Buttons ────────────────────────────────────────────────── */
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5625rem 1.125rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #0c1209;                /* always canvas-dark for contrast */
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dim) 100%);
+    box-shadow: 0 2px 8px var(--color-accent-glow);
+    transition: all 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    border: none;
+
+    &:hover { 
+      background: linear-gradient(135deg, #c5f755 0%, var(--color-accent) 100%);
+      box-shadow: 0 4px 16px var(--color-accent-glow), 0 0 24px rgba(180, 239, 58, 0.1);
+      transform: translateY(-1px);
+    }
+    &:active  { transform: scale(0.96) translateY(0); box-shadow: none; }
+    &:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5625rem 1.125rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-ink-secondary);
+    background-color: var(--color-elevated);
+    border: 1px solid var(--color-border);
+    transition: border-color 150ms, color 150ms, background-color 150ms, transform 100ms, box-shadow 150ms;
+    cursor: pointer;
+
+    &:hover  { 
+      border-color: var(--color-border-hi);
+      color: var(--color-ink-primary);
+      background-color: var(--color-overlay);
+      box-shadow: var(--shadow-sm);
+    }
+    &:active { transform: scale(0.96); }
+    &:disabled { opacity: 0.35; cursor: not-allowed; }
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-ink-muted);
+    background: transparent;
+    border: none;
+    transition: color 150ms, background-color 150ms;
+    cursor: pointer;
+
+    &:hover { 
+      color: var(--color-ink-primary);
+      background-color: color-mix(in srgb, var(--color-elevated) 80%, transparent);
+    }
+    &:active { opacity: 0.7; }
+  }
+
+  /* ── Special components ─────────────────────────────────────── */
+
+  /* Briefing box: inviting, not cold terminal dump */
+  .briefing-box {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent-faint) 0%,
+      var(--color-sage-faint) 100%
+    );
+    border: 1px solid var(--color-border);
+    border-left: 2px solid var(--color-accent-muted);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink-secondary);
+    padding: 1rem 1.125rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    white-space: pre-wrap;
+  }
+
+  /* Tactical tag / badge */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-xs);
+    font-size: 0.5875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background-color: var(--color-accent-faint);
+    color: var(--color-accent);
+    border: 1px solid rgba(180, 239, 58, 0.2);
+  }
+
+  .tag-sage {
+    background-color: var(--color-sage-faint);
+    color: var(--color-sage);
+    border-color: rgba(110, 231, 183, 0.2);
+  }
+
+  /* Divider with optional label */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-ink-faint);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    &::before, &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+  }
+}

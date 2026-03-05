@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "BlogFormatterAgent output contract. Validates the final_blog returned by run().",
+  "type": "object",
+  "required": ["status", "title", "file_path", "file_type"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "error"]
+    },
+    "venture_id": { "type": "string" },
+    "title": { "type": "string", "minLength": 5 },
+    "file_path": { "type": "string", "minLength": 1 },
+    "file_type": {
+      "type": "string",
+      "enum": ["markdown"]
+    },
+    "word_count": { "type": "integer", "minimum": 0 },
+    "primary_keyword": { "type": "string" },
+    "meta_description": { "type": "string" },
+    "primary_keyword_used": { "type": "boolean" },
+    "cta_included": { "type": "boolean" }
+  }
+}

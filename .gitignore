@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+
+# Auth tokens / secrets
+ventures/*/gmail_token.pickle
+ventures/*/youtube_token.pickle
+ventures/*/x_token.pickle
+client_secrets.json
+
+# Node
+node_modules/
+limes_outpost-web/.next/
+.next
+
+# Docker
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

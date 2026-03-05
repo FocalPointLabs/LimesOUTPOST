@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "ScriptAgent output contract. Validates full baton returned by run().",
+  "type": "object",
+  "required": [
+    "status",
+    "scenes",
+    "script_output",
+    "total_word_count"
+  ],
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "total_word_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "scene_id",
+          "visual_description",
+          "voiceover_text"
+        ],
+        "properties": {
+          "scene_id": {
+            "type": "integer"
+          },
+          "visual_description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "voiceover_text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "duration_weight": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          }
+        }
+      }
+    },
+    "script_output": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "segment_type",
+          "text"
+        ],
+        "properties": {
+          "segment_type": {
+            "type": "string",
+            "enum": [
+              "hook",
+              "problem",
+              "insight",
+              "cta"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "visual_cue": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

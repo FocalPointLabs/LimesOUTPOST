@@ -2,7 +2,7 @@
 
 **An open source agentic content platform. Run your own outpost.**
 
-Limes Outpost is a self-hosted AI content factory that handles the full production loop — market research, strategy, scripting, voiceover, video, blog, and newsletter social — from a single input, with a human approval step before anything goes live. Then publish across platforms with one button. Limes also monitors your Gmail, categorizes your inbox, and drafts auto replies to approved whitelist, keeping all others in draft. The built in strategy room has a chatbot that preloads your venture profiles to assist in your process. Daily reports sent as notifications to your Discord channel. 
+LimesOUTPOST is a self-hosted AI content factory that handles the full production loop from market research, strategy, scripting, voiceover, video, blog, newsletter and socials from a single input, with a human approval step before anything goes live. Then publish across platforms with one button. Limes also monitors your Gmail, categorizes your inbox, and writes auto replies to approved whitelist, keeping all others in draft. The built in strategy room has a chatbot that preloads your venture profiles to assist in your process. Daily reports sent as notifications to your Discord channel. 
 
 The name comes from the Roman *limes* — the frontier fortification system. A network of independent outposts, each locally commanded, connected by shared roads and shared standards. That's the idea here. You run your own outpost. Your data, your brand, your workflows, your call on what goes out.
 
@@ -229,7 +229,7 @@ MIT — take it, use it, build on it, run your own outpost.
 
 Built in about a 10 days by one person with no real prior coding experience, free tier AI, and Notepad.
 
-The goal was simple: give independent creators and small businesses the same content production leverage that large teams have, with a human meaningfully in the loop at every step.
+The goal is simple: give independent creators and small businesses the same content production leverage that large teams have, with a human meaningfully in the loop at every step.
 
 The outpost is open. Come build something.
 

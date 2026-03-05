@@ -45,14 +45,14 @@ Intel → Strategy → Script → Voiceover → Video → Blog → Social
 ## The Stack
 
 ```
-flowforge/        Python package — all agents, pipelines, contracts
-cli/              CLI entry point
-api/              FastAPI on :8000 (Swagger at /docs)
-worker/           Celery + Beat async execution
-flowforge-web/    Next.js 16 dashboard
-Postgres 15       source of truth for all pipeline state
-Redis 7           Celery broker
-Docker Compose    runs everything together
+limes_outpost/        Python package — all agents, pipelines, contracts
+cli/                  CLI entry point
+api/                  FastAPI on :8000 (Swagger at /docs)
+worker/               Celery + Beat async execution
+limes_outpost-web/    Next.js 16 dashboard
+Postgres 15           source of truth for all pipeline state
+Redis 7               Celery broker
+Docker Compose        runs everything together
 ```
 
 ---
@@ -94,7 +94,6 @@ DB_PASSWORD=limes_outpost_password
 
 # Optional — enable the workflows you want
 ELEVENLABS_API_KEY=      # Voiceover
-ELEVENLABS_VOICE_ID=
 KLING_ACCESS_KEY=        # Video generation
 KLING_SECRET_KEY=
 CREATOMATE_API_KEY=      # Video composition
@@ -106,7 +105,7 @@ DRY_RUN=True
 ```
 REDIS_URL=redis://redis:6379/0
 
-JWT_SECRET=INSERT_RANDOM
+JWT_SECRET=insert a random sting here
 JWT_ACCESS_EXPIRE_MIN=60
 JWT_REFRESH_EXPIRE_DAYS=30
 
@@ -148,7 +147,7 @@ uvicorn api.main:app --reload --port 8000
 ### 8. Start the frontend
 
 ```bash
-cd flowforge-web
+cd  limes_outpost-web
 npm install
 npm run dev
 ```
@@ -188,20 +187,20 @@ The venture config is the soul of the system. Every agent reads from it. Every o
 ## Project Structure
 
 ```
-limes_post/
-  agents/       all pipeline agents
-  api/          FastAPI routers and schemas
-  contracts/    JSON schema validation for every agent handoff
-  tasks/        Celery task definitions
-  utils/        logger, LLM client, dry run, DB pool
-  config.py     pydantic-settings, all env vars in one place
-cli/            CLI entry point
-api/            FastAPI app entry point  
-worker/         Celery worker entry point
+limes_outpost/
+  agents/           all pipeline agents
+  api/              FastAPI routers and schemas
+  contracts/        JSON schema validation for every agent handoff
+  tasks/            Celery task definitions
+  utils/            logger, LLM client, dry run, DB pool
+  config.py         pydantic-settings, all env vars in one place
+cli/                CLI entry point
+api/                FastAPI app entry point  
+worker/             Celery worker entry point
 limes_outpost-web/  Next.js dashboard
-ventures/       your venture configs (gitignored)
-contracts/      JSON schemas — the handshake between agents
-migrations/     SQL migration files
+ventures/           your venture configs (gitignored)
+contracts/          JSON schemas — the handshake between agents
+migrations/         SQL migration files
 ```
 
 ---

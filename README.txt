@@ -82,8 +82,8 @@ Docker Compose        runs everything together
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/limes-outpost.git
-cd limes-outpost
+git clone https://github.com/yourusername/LimesOUTPOST.git
+cd limes_outpost
 ```
 
 ### 2. Configure environment

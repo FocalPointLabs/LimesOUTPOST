@@ -1,8 +1,21 @@
-# 🍋 Limes Outpost
+# LimesOUTPOST
+
+_
+      _  //  _
+     (_)//  (_)
+   .-'         '-.
+  /    \  |  /    \
+ /  \   \ | /   /  \
+|    \   \|/   /    |
+|----- > ( ) < -----|
+|    /   /|\   \    |
+ \  /   / | \   \  /
+  \    /  |  \    /
+   '- ._______.-' 
 
 **An open source agentic content platform. Run your own outpost.**
 
-LimesOUTPOST is a self-hosted AI content factory that handles the full production loop from market research, strategy, scripting, voiceover, video, blog, newsletter and socials from a single input, with a human approval step before anything goes live. Then publish across platforms with one button. Limes also monitors your Gmail, categorizes your inbox, and writes auto replies to approved whitelist, keeping all others in draft. The built in strategy room has a chatbot that preloads your venture profiles to assist in your process. Daily reports sent as notifications to your Discord channel. 
+LimesOUTPOST is a self-hosted brand aware AI content factory that handles the full production loop from market research to strategy, scripting, voiceover, video, blog, newsletter and socials from a single input, with a human approval step before anything goes live. Then publish across platforms with one button. Limes also monitors your Gmail, categorizes your inbox, and writes auto replies to approved whitelist, keeping all others in draft. The built in strategy room has a chatbot that preloads your venture profiles to assist in your process. Daily reports sent as notifications to your Discord channel. 
 
 The name comes from the Roman *limes* — the frontier fortification system. A network of independent outposts, each locally commanded, connected by shared roads and shared standards. That's the idea here. You run your own outpost. Your data, your brand, your workflows, your call on what goes out.
 

@@ -11,7 +11,7 @@ _
 |    /   /|\   \    |
  \  /   / | \   \  /
   \    /  |  \    /
-   '- ._______.-' 
+    '-._______.-' 
 
 **An open source agentic content platform. Run your own outpost.**
 
